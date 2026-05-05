@@ -15,23 +15,30 @@ struct Paginas
 
 void inicializarRAM(int *memoria)
 {
+    
     for (int i = 0; i < TAM; i++)
     {
         memoria[i] = -1;
     }
 
+    
+    bool usado[TAM] = {false};
+
     int preenchidos = 0;
     while (preenchidos < TAM / 2)
     {
         int pos = rand() % TAM;
+        int pagina = rand() % TAM;
 
-        if (memoria[pos] == -1)
+        if (memoria[pos] == -1 && !usado[pagina])
         {
-            memoria[pos] = rand() % TAM;
+            memoria[pos] = pagina;
+            usado[pagina] = true;
             preenchidos++;
         }
     }
 }
+
 
 void inicializarPaginas(Paginas *paginas, int *memoria)
 {
